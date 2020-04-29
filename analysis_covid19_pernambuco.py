@@ -3,39 +3,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 from util import *
 
-df_br = pd.read_csv('data/covid19-brasil.csv')
-df_br['date'] = pd.to_datetime(df_br['date'], yearfirst=True, format='%Y-%m-%d')
-estados = df_br['state'].unique()
-plt.figure(figsize=(16,9))
-fmt = ['-o', '-.', '-^']
-for i,estado in enumerate(estados):
-    my_plot(df_br[df_br['state'] == estado], 'confirmed', fmt=fmt[int(i/9)],print_label=False)
-plt.legend(estados, ncol=3)
-plt.title('Casos de COVID19 por estado')
-plt.tick_params(axis='x', labelrotation=90, left=True)
-plt.xticks(ticks=df_br['date'])
-plt.savefig('figs/casos_brasil.png')
-
-plt.figure(figsize=(16,9))
-fmt = ['-o', '-.', '-^']
-for i,estado in enumerate(estados):
-    my_plot(df_br[df_br['state'] == estado], 'confirmed_per_100k_inhabitants', fmt=fmt[int(i/9)],print_label=False)
-plt.legend(estados, ncol=3)
-plt.title('Casos por 100 mil habitantes de COVID19 por estado')
-plt.tick_params(axis='x', labelrotation=90, left=True)
-plt.xticks(ticks=df_br['date'])
-plt.savefig('figs/casos_per_100k_brasil.png')
-
-plt.figure(figsize=(16,9))
-fmt = ['-o', '-.', '-^']
-for i,estado in enumerate(estados):
-    my_plot(df_br[df_br['state'] == estado], 'death_rate', fmt=fmt[int(i/9)],print_label=False)
-plt.legend(estados, ncol=3)
-plt.title('Taxa de Mortalidade por COVID19 por estado')
-plt.tick_params(axis='x', labelrotation=90, left=True)
-plt.xticks(ticks=df_br['date'])
-plt.savefig('figs/mortalidade_brasil.png')
-
 places = ['pernambuco', 'paulista', 'recife']
 legend = []
 

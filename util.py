@@ -11,16 +11,11 @@ def scale(x):
         return x
 
 def my_plot(df, column, fmt='-o', print_label=True):
-    plt.plot_date(df['date'], df[column].apply(scale), xdate=True, fmt=fmt)
-    if print_label:
-        for i,d in zip(df['date'], df[column]):
-            plt.text(i, d, str(d))
-    else:
-        for i,d in zip(df.iloc[:1]['date'], df.iloc[:1][column]):
-            if d > 1500:
-                plt.text(i, d, str(d))
+    plt.plot_date(df[df[column] > 0]['date'], df[df[column] > 0][column].apply(scale), xdate=True, fmt=fmt)
+    for i,d in zip(df.iloc[:1]['date'], df.iloc[:1][column]):
+        plt.text(i, d, str(d))
     plt.tick_params(axis='x', labelrotation=90, left=True)
-    plt.xticks(ticks=df['date'])
+    # plt.xticks(ticks=df['date'])
 
 def my_bar(df, column):
     new_daily = df.iloc[:-1][column].array-df.iloc[1:][column].array
