@@ -1,5 +1,7 @@
 date,state,city,place_type,confirmed,deaths,is_last,estimated_population_2019,city_ibge_code,confirmed_per_100k_inhabitants,death_rate
-2020-04-27,PE,,state,5724,508,True,9557071,26,59.89282,0.0887
+2020-04-29,PE,,state,6194,538,True,9557071,26,64.81065,0.0869
+2020-04-28,PE,,state,5724,508,False,9557071,26,59.89283,0.0887
+2020-04-27,PE,,state,5358,450,False,9557071,26,56.0632,0.084
 2020-04-26,PE,,state,4898,415,False,9557071,26,51.25001,0.0847
 2020-04-25,PE,,state,4507,381,False,9557071,26,47.1588,0.0845
 2020-04-24,PE,,state,3999,352,False,9557071,26,41.84336,0.088

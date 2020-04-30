@@ -15,7 +15,6 @@ def my_plot(df, column, fmt='-o', print_label=True):
     for i,d in zip(df.iloc[:1]['date'], df.iloc[:1][column]):
         plt.text(i, d, str(d))
     plt.tick_params(axis='x', labelrotation=90, left=True)
-    # plt.xticks(ticks=df['date'])
 
 def my_bar(df, column):
     new_daily = df.iloc[:-1][column].array-df.iloc[1:][column].array
@@ -23,3 +22,12 @@ def my_bar(df, column):
     plt.bar(df.iloc[-1]['date'], df.iloc[-1][column], color='b')
     plt.tick_params(axis='x', labelrotation=90, left=True)
     plt.xticks(ticks=df['date'])
+
+def compare_places(df1, df2, column, title, place1, place2):
+    plt.figure(figsize=(16,9))
+    my_plot(df1, column)
+    my_plot(df2, column)
+    plt.title(title)
+    plt.legend([place1, place2])
+    plt.savefig('figs/' + title.replace(' ', '_') + '_' + place1 + 'x' + place2 + '.png')
+    plt.close()

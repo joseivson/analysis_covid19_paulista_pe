@@ -35,9 +35,10 @@ plt.title('Novos casos de COVID19 no Brasil')
 plt.savefig('figs/novos_casos_brasil.png')
 
 plt.figure()
-plt.plot_date(df_br['date'].unique(), np.array(casosAcumulados), xdate=True, fmt='-')
+plt.plot_date(df_br['date'].unique(), np.array(casosAcumulados), xdate=True, fmt='-o')
 plt.tick_params(axis='x', labelrotation=90, left=True)
 plt.title('Casos acumulados de COVID19 no Brasil')
+plt.xticks(ticks=df_br['date'])
 plt.savefig('figs/casos_brasil.png')
 
 plt.figure()
@@ -46,9 +47,8 @@ plt.title('Novos obitos de COVID19 no Brasil')
 plt.savefig('figs/novos_obitos_brasil.png')
 
 plt.figure()
-plt.plot_date(df_br['date'].unique(), np.array(obitosAcumulados), xdate=True, fmt='-')
+plt.plot_date(df_br['date'].unique(), np.array(obitosAcumulados), xdate=True, fmt='-o')
 plt.tick_params(axis='x', labelrotation=90, left=True)
 plt.title('Obitos acumulados de COVID19 no Brasil')
+plt.xticks(ticks=df_br['date'])
 plt.savefig('figs/obitos_brasil.png')
-
-plt.show()
