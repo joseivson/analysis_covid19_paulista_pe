@@ -82,3 +82,25 @@ for i,df_place in enumerate(df_places):
     plt.legend(['Taxa de mortalidade em ' + str.upper(places[i])])
     plt.title('Mortalidade da COVID19')
     plt.savefig('figs/mortalidade_' + str(places[i]) + '.png')
+
+
+def percentage(x):
+    return x*100
+
+def per_100k(x):
+    return x * 100000
+
+last = df_br['is_last']
+plt.figure(figsize=(16,9))
+plt.bar(df_br[last]['state'], df_br[last]['death_rate'].apply(percentage))
+plt.ylabel('Em porcentagem (%)')
+plt.title('Taxa de mortalidade por COVID19 nos estados')
+plt.savefig('figs/taxa_mortalidade_estados_brasil.png')
+plt.close()
+
+insert_column(df_br, 'death_per_100k', 'deaths', 'estimated_population_2019')
+plt.figure(figsize=(16,9))
+plt.bar(df_br[last]['state'], df_br[last]['death_per_100k'].apply(per_100k))
+plt.title('Mortos por COVID19 a cada 100 mil habitantes nos estados')
+plt.savefig('figs/mortalidade_100k_estados_brasil.png')
+plt.close()
