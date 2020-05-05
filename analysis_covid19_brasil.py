@@ -18,6 +18,7 @@ plt.title('Casos de COVID19 por estado')
 plt.tick_params(axis='x', labelrotation=90, left=True)
 plt.xticks(ticks=df_br['date'])
 plt.savefig('figs/casos_brasil_por_estado.png')
+plt.close()
 
 casosNovos = []
 casosAcumulados = []
@@ -33,6 +34,16 @@ plt.figure()
 plt.bar(np.arange(len(df_br['date'].unique())), np.array(casosNovos))
 plt.title('Novos casos de COVID19 no Brasil')
 plt.savefig('figs/novos_casos_brasil.png')
+plt.close()
+
+plt.figure()
+legend = []
+for d,c in zip([3,7,14], ['r','g','b']):
+    plt.plot(np.arange(d,len(df_br['date'].unique())), mean_mobile(np.array(casosNovos), d), c=c)
+    legend.append('Média dos últimos ' + str(d) + ' dias')
+plt.legend(legend)
+plt.title('Média de novos casos')
+plt.savefig('figs/media_casos_ultimos_dias.png')
 
 plt.figure()
 plt.plot_date(df_br['date'].unique(), np.array(casosAcumulados), xdate=True, fmt='-o')
@@ -45,6 +56,15 @@ plt.figure()
 plt.bar(np.arange(len(df_br['date'].unique())), np.array(obitosNovos))
 plt.title('Novos obitos de COVID19 no Brasil')
 plt.savefig('figs/novos_obitos_brasil.png')
+
+plt.figure()
+legend = []
+for d,c in zip([3,7,14], ['r','g','b']):
+    plt.plot_date(df_br['date'].unique()[d:], mean_mobile(np.array(obitosNovos), d), c=c)
+    legend.append('Média dos últimos ' + str(d) + ' dias')
+plt.legend(legend)
+plt.title('Média de novos óbitos')
+plt.savefig('figs/media_obitos_ultimos_dias.png')
 
 plt.figure()
 plt.plot_date(df_br['date'].unique(), np.array(obitosAcumulados), xdate=True, fmt='-o')

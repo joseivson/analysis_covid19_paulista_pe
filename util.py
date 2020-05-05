@@ -32,5 +32,12 @@ def compare_places(df1, df2, column, title, place1, place2):
     plt.savefig('figs/' + title.replace(' ', '_') + '_' + place1 + 'x' + place2 + '.png')
     plt.close()
 
-def insert_column(df, name, column1, column2):
+def insert_division_column(df, name, column1, column2):
     df[name] = df[column1].array / df[column2]
+
+def mean_mobile(x, days):
+    y = []
+    for d in range(len(x)-days):
+        y.append(np.mean(x[d:d+days]))
+
+    return np.array(y)

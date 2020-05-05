@@ -42,6 +42,20 @@ compare_places(df_br[df_br['state'] == 'CE'],
                 'CEARÁ',
                 'PERNAMBUCO')
 
+compare_places(df_br[df_br['state'] == 'PB'],
+                df_br[df_br['state'] == 'PE'],
+                'confirmed_per_100k_inhabitants',
+                'Confirmados por 100 mil habitantes',
+                'PARAÍBA',
+                'PERNAMBUCO')
+
+compare_places(df_br[df_br['state'] == 'PB'],
+                df_br[df_br['state'] == 'PE'],
+                'death_rate',
+                'Taxa de mortalidade',
+                'PARAÍBA',
+                'PERNAMBUCO')
+
 compare_places(df_recife,
                 df_paulista,
                 'confirmed_per_100k_inhabitants',
@@ -100,7 +114,7 @@ plt.title('Taxa de mortalidade por COVID19 nos estados')
 plt.savefig('figs/taxa_mortalidade_estados_brasil.png')
 plt.close()
 
-insert_column(df_br, 'death_per_100k', 'deaths', 'estimated_population_2019')
+insert_division_column(df_br, 'death_per_100k', 'deaths', 'estimated_population_2019')
 df_br['death_per_100k'] = df_br['death_per_100k'].apply(per_100k)
 plt.figure(figsize=(16,9))
 plt.bar(df_br[last]['state'], df_br[last]['death_per_100k'])
@@ -122,7 +136,7 @@ plt.savefig('figs/confirmed_x_death_per_100k_estados.png')
 plt.close()
 
 last = df_pe_city['is_last']
-insert_column(df_pe_city, 'death_per_100k', 'deaths', 'estimated_population_2019')
+insert_division_column(df_pe_city, 'death_per_100k', 'deaths', 'estimated_population_2019')
 df_pe_city['death_per_100k'] = df_pe_city['death_per_100k'].apply(per_100k)
 plt.figure(figsize=(16,9))
 plt.scatter(df_pe_city[last]['death_per_100k'], 
