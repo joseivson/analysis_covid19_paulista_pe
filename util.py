@@ -16,12 +16,14 @@ def my_plot(df, column, fmt='-o', print_label=True):
         plt.text(i, d, str(d))
     plt.tick_params(axis='x', labelrotation=90, left=True)
 
-def my_bar(df, column):
-    new_daily = df.iloc[:-1][column].array-df.iloc[1:][column].array
-    plt.bar(df.iloc[:-1]['date'], new_daily, color='b')
-    plt.bar(df.iloc[-1]['date'], df.iloc[-1][column], color='b')
+def my_bar(df, column, legend, title, fig_name):
+    plt.figure(figsize=(16,9))
+    plt.bar(df['date'], df[column], color='b')
     plt.tick_params(axis='x', labelrotation=90, left=True)
     plt.xticks(ticks=df['date'])
+    plt.legend(legend)
+    plt.title(title)
+    plt.savefig(fig_name)
 
 def compare_places(df1, df2, column, title, place1, place2):
     plt.figure(figsize=(16,9))
