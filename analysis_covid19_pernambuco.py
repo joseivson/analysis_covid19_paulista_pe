@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 from util import *
+from projection import *
 
 df_br = pd.read_csv('data/covid19-' + 'brasil' + '.csv')
 df_br['date'] = pd.to_datetime(df_br['date'], yearfirst=True, format='%Y-%m-%d')
@@ -14,66 +15,64 @@ df_pe['date'] = pd.to_datetime(df_pe['date'], yearfirst=True, format='%Y-%m-%d')
 df_pe_city = pd.read_csv('data/covid19-pernambuco_per_city.csv')
 df_pe_city['date'] = pd.to_datetime(df_pe_city['date'], yearfirst=True, format='%Y-%m-%d')
 
-print(df_paulista.info())
+df_sp = df_br[df_br['state'] == 'SP']
 
-compare_places(df_br[df_br['state'] == 'SP'],
-                df_br[df_br['state'] == 'PE'],
+compare_places([df_br[df_br['state'] == 'SP'],
+                df_br[df_br['state'] == 'PE']],
                 'last_available_confirmed_per_100k_inhabitants',
                 'Confirmados por 100 mil habitantes',
-                'SÃO PAULO',
-                'PERNAMBUCO')
+                ['SÃO PAULO','PERNAMBUCO'])
 
-compare_places(df_br[df_br['state'] == 'SP'],
-                df_br[df_br['state'] == 'PE'],
+compare_places([df_br[df_br['state'] == 'SP'],
+                df_br[df_br['state'] == 'PE']],
                 'last_available_death_rate',
                 'Taxa de mortalidade',
-                'SÃO PAULO',
-                'PERNAMBUCO')
+                ['SÃO PAULO','PERNAMBUCO'])
 
-compare_places(df_br[df_br['state'] == 'CE'],
-                df_br[df_br['state'] == 'PE'],
+compare_places([df_br[df_br['state'] == 'CE'],
+                df_br[df_br['state'] == 'PE']],
                 'last_available_confirmed_per_100k_inhabitants',
                 'Confirmados por 100 mil habitantes',
-                'CEARÁ',
-                'PERNAMBUCO')
+                ['CEARÁ','PERNAMBUCO'])
 
-compare_places(df_br[df_br['state'] == 'CE'],
-                df_br[df_br['state'] == 'PE'],
+compare_places([df_br[df_br['state'] == 'CE'],
+                df_br[df_br['state'] == 'PE']],
                 'last_available_death_rate',
                 'Taxa de mortalidade',
-                'CEARÁ',
-                'PERNAMBUCO')
+                ['CEARÁ','PERNAMBUCO'])
 
-compare_places(df_br[df_br['state'] == 'PB'],
-                df_br[df_br['state'] == 'PE'],
+compare_places([df_br[df_br['state'] == 'PB'],
+                df_br[df_br['state'] == 'PE']],
                 'last_available_confirmed_per_100k_inhabitants',
                 'Confirmados por 100 mil habitantes',
-                'PARAÍBA',
-                'PERNAMBUCO')
+                ['PARAÍBA','PERNAMBUCO'])
 
-compare_places(df_br[df_br['state'] == 'PB'],
-                df_br[df_br['state'] == 'PE'],
+compare_places([df_br[df_br['state'] == 'PB'],
+                df_br[df_br['state'] == 'PE']],
                 'last_available_death_rate',
                 'Taxa de mortalidade',
-                'PARAÍBA',
-                'PERNAMBUCO')
+                ['PARAÍBA','PERNAMBUCO'])
 
-compare_places(df_recife,
-                df_paulista,
+compare_places([df_recife,df_paulista],
                 'last_available_confirmed_per_100k_inhabitants',
                 'Confirmados por 100 mil habitantes',
-                'RECIFE',
-                'PAULISTA')
+                ['RECIFE','PAULISTA'])
 
-compare_places(df_recife,
-                df_paulista,
+compare_places([df_recife,df_paulista],
                 'last_available_death_rate',
                 'Taxa de mortalidade',
-                'RECIFE',
-                'PAULISTA')
+                ['RECIFE','PAULISTA'])
 
-df_places = [df_pe, df_paulista, df_recife]
-places = ['pernambuco', 'paulista', 'recife']
+compare_places([df_br[df_br['state'] == 'SP'],
+                df_br[df_br['state'] == 'PE'],
+                df_br[df_br['state'] == 'CE'],
+                df_br[df_br['state'] == 'PB']],
+                'last_available_confirmed_per_100k_inhabitants',
+                'Confirmados por 100 mil habitantes',
+                ['SÃO PAULO','PERNAMBUCO', 'CEARÁ', 'PARAÍBA'])
+
+df_places = [df_pe, df_paulista, df_recife, df_sp]
+places = ['pernambuco', 'paulista', 'recife', 'são paulo']
 
 for i,df_place in enumerate(df_places):
     my_bar(df_place, 'new_confirmed', 
@@ -92,27 +91,35 @@ for i,df_place in enumerate(df_places):
     plt.legend(['Confirmados em ' + str.upper(places[i]), 'Mortes em ' + str.upper(places[i])])
     plt.title('Casos de COVID19')
     plt.savefig('figs/casos_' + str(places[i]) + '.png')
+    plt.close()
 
     plt.figure(figsize=(16,9))
     my_plot(df_place, 'last_available_confirmed_per_100k_inhabitants')
     plt.legend(['Confirmados por 100 mil habitantes em ' + str.upper(places[i])])
     plt.title('Casos por 100 mil de COVID19')
     plt.savefig('figs/casos_100k_' + str(places[i]) + '.png')
-    
+    plt.close()
+
     plt.figure(figsize=(16,9))
     my_plot(df_place, 'last_available_death_rate', '-+')
     plt.legend(['Taxa de mortalidade em ' + str.upper(places[i])])
     plt.title('Mortalidade da COVID19')
     plt.savefig('figs/mortalidade_' + str(places[i]) + '.png')
+    plt.close()
 
-def percentage(x):
-    return x*100
+    plt.figure(figsize=(16,9))
+    legend = []
+    for day in [3,7,14]:
+        plt.plot_date(df_place.iloc[:-day]['date'], mean_mobile(df_place['new_confirmed'].array, day), fmt='-')
+        legend.append('Últimos ' + str(day) + ' dias em ' + str(places[i]))
+    plt.legend(legend)
+    plt.title('Média de novos casos nos últimos dias')
+    plt.savefig('figs/media_movel_' + str(places[i]) + '.png')
+    plt.close()
 
-def per_100k(x):
-    return x * 100000
-
-last = df_br['is_last']
 plt.figure(figsize=(16,9))
+df_br.sort_values(by='last_available_death_rate', ascending=False, inplace=True)
+last = df_br['is_last']
 plt.bar(df_br[last]['state'], df_br[last]['last_available_death_rate'].apply(percentage))
 plt.ylabel('Em porcentagem (%)')
 plt.title('Taxa de mortalidade por COVID19 nos estados')
@@ -121,6 +128,8 @@ plt.close()
 
 insert_division_column(df_br, 'death_per_100k', 'last_available_deaths', 'estimated_population_2019')
 df_br['death_per_100k'] = df_br['death_per_100k'].apply(per_100k)
+df_br.sort_values(by='death_per_100k', ascending=False, inplace=True)
+last = df_br['is_last']
 plt.figure(figsize=(16,9))
 plt.bar(df_br[last]['state'], df_br[last]['death_per_100k'])
 plt.title('Mortos por COVID19 a cada 100 mil habitantes nos estados')
@@ -134,6 +143,10 @@ for state in df_br[last]['state']:
     plt.text(df_br[last & (df_br['state']==state)]['death_per_100k'], 
             df_br[last & (df_br['state']==state)]['last_available_confirmed_per_100k_inhabitants'],
             state)
+    if state == 'SP':
+        plt.scatter(df_br[last & (df_br['state'] == 'SP')]['death_per_100k'], 
+            df_br[last & (df_br['state'] == 'SP')]['last_available_confirmed_per_100k_inhabitants'],
+            c='r')
 plt.title('Casos e Mortes por COVID19')
 plt.xlabel('Mortes a cada 100 mil habitantes')
 plt.ylabel('Casos a cada 100 mil habitantes')
