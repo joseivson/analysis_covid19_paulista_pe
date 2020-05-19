@@ -1,5 +1,11 @@
 epidemiological_week,date,order_for_place,state,city,city_ibge_code,place_type,last_available_confirmed,last_available_confirmed_per_100k_inhabitants,new_confirmed,last_available_deaths,new_deaths,last_available_death_rate,estimated_population_2019,is_last,is_repeated
-20,2020-05-12,62,PE,Recife,2611606,city,6581,399.88406,-643,385,-40,0.0585,1645727,True,False
+21,2020-05-18,68,PE,Recife,2611606,city,9772,593.78013,0,596,0,0.061,1645727,True,False
+21,2020-05-17,67,PE,Recife,2611606,city,9772,593.78013,359,596,23,0.061,1645727,False,False
+20,2020-05-16,66,PE,Recife,2611606,city,9413,571.96607,1061,573,35,0.0609,1645727,False,False
+20,2020-05-15,65,PE,Recife,2611606,city,8352,507.49608,256,538,31,0.0644,1645727,False,False
+20,2020-05-14,64,PE,Recife,2611606,city,8096,491.94064,339,507,28,0.0626,1645727,False,False
+20,2020-05-13,63,PE,Recife,2611606,city,7757,471.34184,280,479,29,0.0618,1645727,False,False
+20,2020-05-12,62,PE,Recife,2611606,city,7477,454.32809,253,450,25,0.0602,1645727,False,False
 20,2020-05-11,61,PE,Recife,2611606,city,7224,438.95494,240,425,10,0.0588,1645727,False,False
 20,2020-05-10,60,PE,Recife,2611606,city,6984,424.37172,403,415,30,0.0594,1645727,False,False
 19,2020-05-09,59,PE,Recife,2611606,city,6581,399.88406,806,385,31,0.0585,1645727,False,False

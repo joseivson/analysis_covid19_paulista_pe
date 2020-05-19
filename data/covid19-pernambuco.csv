@@ -1,5 +1,11 @@
 epidemiological_week,date,order_for_place,state,city,city_ibge_code,place_type,last_available_confirmed,last_available_confirmed_per_100k_inhabitants,new_confirmed,last_available_deaths,new_deaths,last_available_death_rate,estimated_population_2019,is_last,is_repeated
-20,2020-05-12,62,PE,,26,state,14309,149.7216,541,1157,70,0.0809,9557071,True,False
+21,2020-05-18,68,PE,,26,state,20094,210.2527,642,1640,124,0.0816,9557071,True,False
+21,2020-05-17,67,PE,,26,state,19452,203.53516,964,1516,55,0.0779,9557071,False,False
+20,2020-05-16,66,PE,,26,state,18488,193.44839,2279,1461,80,0.079,9557071,False,False
+20,2020-05-15,65,PE,,26,state,16209,169.60217,621,1381,83,0.0852,9557071,False,False
+20,2020-05-14,64,PE,,26,state,15588,163.10437,687,1298,74,0.0833,9557071,False,False
+20,2020-05-13,63,PE,,26,state,14901,155.91597,592,1224,67,0.0821,9557071,False,False
+20,2020-05-12,62,PE,,26,state,14309,149.7216,541,1157,70,0.0809,9557071,False,False
 20,2020-05-11,61,PE,,26,state,13768,144.06087,493,1087,40,0.079,9557071,False,False
 20,2020-05-10,60,PE,,26,state,13275,138.90239,805,1047,75,0.0789,9557071,False,False
 19,2020-05-09,59,PE,,26,state,12470,130.47931,883,972,45,0.0779,9557071,False,False

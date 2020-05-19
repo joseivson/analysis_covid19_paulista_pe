@@ -169,3 +169,24 @@ plt.xlabel('Mortes a cada 100 mil habitantes')
 plt.ylabel('Casos a cada 100 mil habitantes')
 plt.savefig('figs/confirmed_x_death_per_100k_cidades.png')
 plt.close()
+
+from matplotlib.cm import ScalarMappable
+sm = ScalarMappable()
+sm.set_clim(0,26)
+
+fig,ax = plt.subplots()
+df_br.sort_values(by='last_available_confirmed', ascending=True, inplace=True)
+for date in df_br['date'].unique():
+    
+    previous_sum = 0
+    for i,state in enumerate(df_br[df_br['date'] == date]['state']):
+        current_state = df_br[(df_br['date'] == date) & (df_br['state'] == state)]
+        if i == 0:
+            ax.bar(date, current_state['last_available_confirmed'], label=state, color=sm.to_rgba([i]))
+        else:
+            ax.bar(date, current_state['last_available_confirmed'], label=state, bottom=previous_sum, color=sm.to_rgba([i]))
+
+        previous_sum += current_state['last_available_confirmed'].array
+
+plt.savefig('figs/acumulado_casos.png')
+plt.close()

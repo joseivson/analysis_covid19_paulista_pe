@@ -1,5 +1,11 @@
 epidemiological_week,date,order_for_place,state,city,city_ibge_code,place_type,last_available_confirmed,last_available_confirmed_per_100k_inhabitants,new_confirmed,last_available_deaths,new_deaths,last_available_death_rate,estimated_population_2019,is_last,is_repeated
-20,2020-05-12,40,PE,Paulista,2610707,city,799,240.82659,-91,54,-3,0.0676,331774,True,False
+21,2020-05-18,46,PE,Paulista,2610707,city,1177,354.75957,0,73,0,0.062,331774,True,False
+21,2020-05-17,45,PE,Paulista,2610707,city,1177,354.75957,57,73,2,0.062,331774,False,False
+20,2020-05-16,44,PE,Paulista,2610707,city,1120,337.5792,91,71,0,0.0634,331774,False,False
+20,2020-05-15,43,PE,Paulista,2610707,city,1029,310.15089,46,71,6,0.069,331774,False,False
+20,2020-05-14,42,PE,Paulista,2610707,city,983,296.28603,34,65,1,0.0661,331774,False,False
+20,2020-05-13,41,PE,Paulista,2610707,city,949,286.03809,28,64,2,0.0674,331774,False,False
+20,2020-05-12,40,PE,Paulista,2610707,city,921,277.59861,31,62,5,0.0673,331774,False,False
 20,2020-05-11,39,PE,Paulista,2610707,city,890,268.2549,33,57,2,0.064,331774,False,False
 20,2020-05-10,38,PE,Paulista,2610707,city,857,258.30837,58,55,1,0.0642,331774,False,False
 19,2020-05-09,37,PE,Paulista,2610707,city,799,240.82659,91,54,13,0.0676,331774,False,False
